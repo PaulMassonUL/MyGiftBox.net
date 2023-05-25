@@ -1,0 +1,10 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block giftmain %}
+    <h1>Catégories</h1>
+    {% for categ in categories %}
+        <a href="{{ categoriesRoute }}{{ categ.id }}">{{ categ.libelle }}</a><br>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}{{ categorie.libelle }}{% endblock %}
+
+{% block giftmain %}
+    <a href="{{ categoriesRoute }}">← Retour à la liste des catégories</a>
+    <h1>Catégorie {{ categorie.libelle }}</h1>
+    <p>{{ categorie.description }}</p>
+    <a href="{{ prestationsRoute }}">Voir les prestations</a>
+{% endblock %}

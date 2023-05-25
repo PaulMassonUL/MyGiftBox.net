@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="{{ base_path() }}/css/style.css" rel="stylesheet">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    {% include "header.twig" %}
+    {% include "nav.twig" %}
+
+    <section id="main">
+
+        {% block giftmain %} {% endblock %}
+
+    </section>
+        
+    {% include "footer.twig" %}
+</body>
+</html>

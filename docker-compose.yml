@@ -1,0 +1,41 @@
+version: "3"
+
+networks:
+  gift.net:
+    driver: bridge
+
+services:
+  sql:
+    image: mariadb:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+      - MYSQL_USER=${DB_USER_NAME}
+      - MYSQL_PASSWORD=${DB_USER_PASSWORD}
+      - MYSQL_DATABASE=${DB_NAME}
+    ports:
+      - "8080:3306"
+    networks:
+      gift.net:
+        aliases:
+          - sql.db
+          - sql326.net
+  adminer:
+    image: adminer
+    ports:
+      - "6060:8080"
+    networks:
+      - gift.net
+
+  php:
+    image: canals/php:latest
+    ports:
+      - "8000:80"
+    volumes :
+      - ./gift.appli/public:/var/www/html
+      - ./gift.appli/src:/var/www/src
+      - ./shared/img:/var/www/html/img
+    working_dir: /var/www/src
+    networks:
+      - gift.net
+    depends_on:
+      - sql

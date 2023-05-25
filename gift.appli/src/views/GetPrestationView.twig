@@ -1,0 +1,11 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Prestation {{ prestation.libelle }}{% endblock %}
+
+{% block giftmain %}
+    <a href="{{ prestationsRoute }}">← Retour à la liste des prestations</a>
+    <h1>{{ prestation.libelle }}</h1>
+    <p>{{ prestation.description }}</p>
+    <p>{{ prestation.tarif }} €</p>
+    <img src="{{ image }}" alt="Image de {{ prestation.libelle }}">
+{% endblock %}

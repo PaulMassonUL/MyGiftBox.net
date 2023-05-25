@@ -1,0 +1,10 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Prestations de la catégorie {{ categorie }}{% endblock %}
+
+{% block giftmain %}
+    <h1>Prestations de la catégorie {{ categorie }}</h1>
+    {% for presta in prestations %}
+        <a href="{{ prestationsRoute }}{{ presta.id }}">{{ presta.libelle }}</a><br>
+    {% endfor %}
+{% endblock %}
