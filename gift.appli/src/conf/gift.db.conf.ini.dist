@@ -1,6 +1,6 @@
 driver=mysql
 username=
-password=
+password=''
 host=sql.db
 database=giftbox
 charset=utf8
