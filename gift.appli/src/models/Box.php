@@ -9,6 +9,8 @@ class Box extends \Illuminate\Database\Eloquent\Model {
     public $timestamps = true;
     public $keyType = 'string';
 
+    const STATUS_CREATED = 1;
+
     public function prestations() {
         return $this->belongsToMany(Prestation::class, 'box2presta', 'box_id', 'presta_id')->withPivot('quantite');
     }
