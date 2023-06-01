@@ -2,6 +2,7 @@
 
 namespace gift\app\services\prestations;
 
+use Exception;
 use gift\app\models\Categorie;
 use gift\app\models\Prestation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -43,5 +44,28 @@ class PrestationsService
         } catch (ModelNotFoundException) {
             throw new CategorieNotFoundException();
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function createCategorie(array $data): void
+    {
+        $libelleFiltered = htmlspecialchars($data['libelle'], ENT_QUOTES, 'UTF-8');
+        $descriptionFiltered = htmlspecialchars($data['description'], ENT_QUOTES, 'UTF-8');
+
+        if ($data['libelle'] !== $libelleFiltered || $data['description'] !== $descriptionFiltered) {
+            throw new Exception('Données suspectes fournies');
+        }
+
+        $categorie = new Categorie();
+        $categorie->libelle = $libelleFiltered;
+        $categorie->description = $descriptionFiltered;
+
+        $categorieExist = Categorie::where('libelle', $libelleFiltered)->first();
+        if($categorieExist){
+            throw new Exception('La catégorie existe déjà');
+        }
+        $categorie->save();
     }
 }

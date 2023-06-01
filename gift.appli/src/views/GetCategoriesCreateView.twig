@@ -1,0 +1,29 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Create categorie{% endblock %}
+
+{% block giftmain %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="POST" action="{{ url_for('categoriesCreated') }}" class="my-4">
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+
+                    <div class="mb-3">
+                        <label for="libelle" class="form-label fw-bold">Nom de la catégorie :</label>
+                        <input type="text" name="libelle" id="libelle" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label fw-bold">Description :</label>
+                        <textarea name="description" id="description" class="form-control" required></textarea>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Soumettre</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

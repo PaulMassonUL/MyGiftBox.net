@@ -47,3 +47,11 @@ footer {
     font-size: 20px;
     font-weight: bold;
 }
+
+.navbar-nav .nav-link:hover {
+    background-color: #007bff; /* Couleur de fond au survol */
+    color: #fff; /* Couleur du texte au survol */
+}
+
+
+
