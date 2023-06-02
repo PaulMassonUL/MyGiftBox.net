@@ -7,7 +7,7 @@ use Ramsey\Uuid\Uuid;
 
 class BoxService
 {
-    public function createBox(array $data)
+    public function createBox(array $data): void
     {
         if (empty($data['libelle']) || empty($data['description'])) return;
 
@@ -21,5 +21,13 @@ class BoxService
         $box->message_kdo = $data['message_kdo'] ?? '';
         $box->statut = $box::STATUS_CREATED;
         $box->save();
+    }
+
+    public function addPrestationToBox(string $id_presta, string $id_box): void
+    {
+        $box = Box::find($id_box);
+        if (empty($box)) return;
+
+        $box->prestations()->attach($id_presta, ['quantite' => 1]);
     }
 }

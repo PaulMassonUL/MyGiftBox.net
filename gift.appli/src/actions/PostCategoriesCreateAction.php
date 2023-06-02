@@ -47,8 +47,7 @@ class PostCategoriesCreateAction
         $prestationSerice = new PrestationsService();
         $prestationSerice->createCategorie($categoryData);
 
-        $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
-        $url = $routeParser->urlFor('categoriesList');
+        $url = RouteContext::fromRequest($rq)->getRouteParser()->urlFor('categoriesList');
 
         return $rs->withStatus(302)->withHeader('Location', $url);
     }

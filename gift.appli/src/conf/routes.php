@@ -6,6 +6,7 @@ use gift\app\actions\GetCategoriesAction;
 use gift\app\actions\GetCategoriesCreateAction;
 use gift\app\actions\GetPrestationAction;
 use gift\app\actions\GetPrestationsAction;
+use gift\app\actions\PostBoxAddPrestationAction;
 use gift\app\actions\PostBoxesNewAction;
 use gift\app\actions\PostCategoriesCreateAction;
 
@@ -26,4 +27,6 @@ return function (\Slim\App $app): void {
 
     $app->get('/boxes/new[/]', GetBoxesNewAction::class)->setName('boxesNew');
     $app->post('/boxes/new[/]', PostBoxesNewAction::class)->setName('boxesNewCreated');
+
+    $app->post('/categories/{cat_id}/prestations/add[/]', PostBoxAddPrestationAction::class)->setName('boxAddPrestation');
 };
