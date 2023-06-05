@@ -38,9 +38,8 @@ class PrestationsService
     public function getPrestationsByCategorie(int $categ_id): array
     {
         try {
-            Categorie::findOrfail($categ_id);
-            $prestation = Prestation::where('cat_id', $categ_id)->get();
-            return $prestation->toArray();
+            $categorie = Categorie::where('id', $categ_id)->with('prestations')->firstOrFail();
+            return $categorie->toArray();
         } catch (ModelNotFoundException) {
             throw new CategorieNotFoundException();
         }

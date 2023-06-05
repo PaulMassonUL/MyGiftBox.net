@@ -22,8 +22,7 @@ class GetPrestationsAction extends Action
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'GetPrestationsView.twig', [
                 'prestationsRoute' => $routeParser->urlFor('prestationsList', ['id' => $args['id']]),
-                'categorie' => $args['id'],
-                'prestations' => $prestationsService->getPrestationsByCategorie($args['id'])
+                'categorie' => $prestationsService->getPrestationsByCategorie($args['id'])
             ]);
         } catch (CategorieNotFoundException $e) {
             throw new HttpBadRequestException($rq, "Impossible de trouver la catégorie " . $args['id']);

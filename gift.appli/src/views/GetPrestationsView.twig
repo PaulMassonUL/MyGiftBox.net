@@ -1,10 +1,25 @@
 {% extends "gift.skeleton.twig" %}
 
-{% block title %}Prestations de la catégorie {{ categorie }}{% endblock %}
+{% block title %}Prestations de la catégorie {{ categorie.libelle }}{% endblock %}
 
 {% block giftmain %}
-    <h1>Prestations de la catégorie {{ categorie }}</h1>
-    {% for presta in prestations %}
-        <a href="{{ prestationsRoute }}{{ presta.id }}">{{ presta.libelle }}</a><br>
-    {% endfor %}
+    <h1>Prestations de la catégorie {{ categorie.libelle }}</h1>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+        {% for presta in categorie.prestations %}
+            <div class="col">
+                <div class="card h-100">
+                    <img class="card-img-top img-fluid" src="../../../img/{{ presta.img }}" alt="{{ presta.libelle }}">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ presta.libelle }}</h4>
+                        <p class="card-text">Prix : {{ presta.tarif }} €</p>
+                        <p class="card-text">Catégorie : {{ categorie.libelle }}</p>
+                        <div class="text-center">
+                            <a href="{{ prestationsRoute }}{{ presta.id }}" class="btn btn-primary">Voir plus</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
