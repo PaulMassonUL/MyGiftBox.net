@@ -39,3 +39,16 @@ services:
       - gift.net
     depends_on:
       - sql
+
+  api:
+    image: canals/php:latest
+    ports:
+      - "8001:80"
+    volumes :
+      - ./gift.api/public:/var/www/html
+      - ./gift.api/src:/var/www/src
+    working_dir: /var/www/src
+    networks:
+      - gift.net
+    depends_on:
+      - sql
