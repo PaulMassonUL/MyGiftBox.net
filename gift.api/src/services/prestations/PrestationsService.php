@@ -2,7 +2,6 @@
 
 namespace gift\api\services\prestations;
 
-use Exception;
 use gift\api\models\Categorie;
 use gift\api\models\Prestation;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -21,7 +20,7 @@ class PrestationsService
             $categorie = Categorie::findOrfail($id);
             return $categorie->toArray();
         } catch (ModelNotFoundException) {
-            throw new BoxNotFoundException();
+            throw new CategorieNotFoundException();
         }
     }
 
@@ -42,7 +41,7 @@ class PrestationsService
             $prestation = Prestation::where('cat_id', $categ_id)->get();
             return $prestation->toArray();
         } catch (ModelNotFoundException) {
-            throw new BoxNotFoundException();
+            throw new CategorieNotFoundException();
         }
     }
 

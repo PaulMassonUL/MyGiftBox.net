@@ -5,21 +5,39 @@
 {% block giftmain %}
     <h1>Prestations de la catégorie {{ categorie.libelle }}</h1>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
-        {% for presta in categorie.prestations %}
-            <div class="col">
-                <div class="card h-100">
-                    <img class="card-img-top img-fluid" src="../../../img/{{ presta.img }}" alt="{{ presta.libelle }}">
-                    <div class="card-body">
-                        <h4 class="card-title">{{ presta.libelle }}</h4>
-                        <p class="card-text">Prix : {{ presta.tarif }} €</p>
-                        <p class="card-text">Catégorie : {{ categorie.libelle }}</p>
-                        <div class="text-center">
-                            <a href="{{ prestationsRoute }}{{ presta.id }}" class="btn btn-primary">Voir plus</a>
+    <div class="d-flex justify-content-end mb-3">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Trier par prix
+            </button>
+            <div class="dropdown-menu" aria-labelledby="sortDropdown">
+                <a class="dropdown-item" href="{{ url_for('prestationsList', {'id': categorie.id}) }}">Aucun tri</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{{ baseUrl }}?tri=asc">Prix croissant</a>
+                <a class="dropdown-item" href="{{ baseUrl }}?tri=desc">Prix décroissant</a>
+            </div>
+        </div>
+    </div>
+
+    {% if categorie.prestations %}
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-4">
+            {% for presta in categorie.prestations %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img class="card-img-top img-fluid" src="../../../img/{{ presta.img }}" alt="{{ presta.libelle }}">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ presta.libelle }}</h4>
+                            <p class="card-text">Prix : {{ presta.tarif }} €</p>
+                            <p class="card-text">Catégorie : {{ categorie.libelle }}</p>
+                            <div class="text-center">
+                                <a href="{{ url_for('prestation', {'cat_id': categorie.id, 'presta_id': presta.id}) }}" class="btn btn-primary">Voir plus</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted mt-5 mb-5 h5">Aucune prestation trouvée dans cette catégorie.</p>
+    {% endif %}
 {% endblock %}

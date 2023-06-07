@@ -17,15 +17,14 @@ class GetPrestationsAction extends Action
         try {
             $prestationsService = new PrestationsService();
 
-            $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
+            $tri = $rq->getQueryParams()['tri'] ?? "";
 
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'GetPrestationsView.twig', [
-                'prestationsRoute' => $routeParser->urlFor('prestationsList', ['id' => $args['id']]),
-                'categorie' => $prestationsService->getPrestationsByCategorie($args['id'])
+                'categorie' => $prestationsService->getPrestationsByCategorie($args['id'], $tri),
             ]);
         } catch (CategorieNotFoundException $e) {
-            throw new HttpBadRequestException($rq, "Impossible de trouver la catégorie " . $args['id']);
+            throw new HttpBadRequestException($rq, "Impossible de trouver la catégorie " . $args['id'] . ". " . $e->getMessage());
         }
     }
 }
