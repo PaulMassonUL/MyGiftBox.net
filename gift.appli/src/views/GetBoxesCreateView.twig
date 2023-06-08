@@ -1,0 +1,44 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Nouveau coffret{% endblock %}
+
+{% block giftmain %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="POST" action="{{ url_for('boxesCreated') }}" class="my-4">
+                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+
+                <div class="mb-3">
+                    <label for="libelle" class="form-label fw-bold">Nom du coffret :</label>
+                    <input type="text" name="libelle" id="libelle" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label fw-bold">Description :</label>
+                    <textarea name="description" id="description" class="form-control" required></textarea>
+                </div>
+
+                <label for="kdo" class="form-label fw-bold">Est-ce un cadeau ?</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">
+                        <input class="form-check-input form-check-input-lg mt-0" type="checkbox" name="kdo" id="kdo" onchange="toggleTextarea()" style="width: 20px; height: 20px;" title="Cadeau ?">
+                    </span>
+                    <div class="form-floating">
+                        <textarea class="form-control" name="message_kdo" id="message_kdo" placeholder="Message du cadeau" disabled></textarea>
+                        <label for="message_kdo">Message du cadeau</label>
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Valider</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        toggleTextarea();
+        function toggleTextarea() {
+            document.getElementById("message_kdo").disabled = !document.getElementById("kdo").checked;
+        }
+    </script>
+{% endblock %}
