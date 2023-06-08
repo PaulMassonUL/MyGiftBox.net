@@ -2,19 +2,20 @@
 
 namespace gift\app\actions;
 
+use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\Twig;
 
-class PostBoxesNewAction extends Action
+class GetBoxesCreateAction extends Action
 {
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
-        $data = $rq->getParsedBody();
+        $token = CsrfService::generate();
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'PostBoxesNewView.twig', [
-            'data' => $data,
-        ]);
+        return $view->render($rs, 'GetBoxesCreateView.twig',
+            ['token' => $token]
+        );
     }
 }

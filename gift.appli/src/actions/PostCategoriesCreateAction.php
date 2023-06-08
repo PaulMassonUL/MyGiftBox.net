@@ -34,8 +34,8 @@ class PostCategoriesCreateAction
 
         try{
             CsrfService::check($token);
-        }catch (CsrfException $e){
-            throw new CsrfException("CSRF token ");
+        }catch (CsrfException){
+            throw new CsrfException("CSRF token is invalid");
         }
 
         //données du formulaire

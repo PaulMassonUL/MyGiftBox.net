@@ -35,10 +35,15 @@ class PrestationsService
         }
     }
 
-    public function getPrestationsByCategorie(int $categ_id): array
+    public function getPrestationsByCategorie(int $categ_id, string $tri = ""): array
     {
         try {
-            $categorie = Categorie::where('id', $categ_id)->with('prestations')->firstOrFail();
+            $categorie = Categorie::where('id', $categ_id)
+                ->with(['prestations' => function ($query) use ($tri) {
+                    if (in_array($tri, ['asc', 'desc'])) $query->orderBy('tarif', $tri);
+                }])
+                ->firstOrFail();
+
             return $categorie->toArray();
         } catch (ModelNotFoundException) {
             throw new CategorieNotFoundException();
