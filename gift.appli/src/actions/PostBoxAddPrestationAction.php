@@ -26,7 +26,8 @@ class PostBoxAddPrestationAction extends Action
 
         if (isset($data['presta_id']) && isset($_SESSION['current_box_id'])) {
             $boxService = new BoxService();
-            $boxService->addPrestationToBox($data['presta_id'], $_SESSION['current_box_id']);
+            $qty = ($data['qty'] && is_numeric($data['qty']) && $data['qty'] > 0) ? $data['qty'] : 1;
+            $boxService->addPrestationToBox($data['presta_id'], $_SESSION['current_box_id'], $qty);
         }
 
         $url = RouteContext::fromRequest($rq)->getRouteParser()->urlFor('prestationsList', ['id' => $args['cat_id']]);
