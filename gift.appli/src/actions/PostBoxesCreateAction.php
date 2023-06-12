@@ -29,9 +29,9 @@ class PostBoxesCreateAction extends Action
         if (!isset($data['description'])) throw new Exception('Missing description');
 
         $boxService = new BoxService();
-        $box = $boxService->createBox($data);
+        $boxId = $boxService->createBox($data);
 
-        $_SESSION['current_box_id'] = $box->id;
+        $_SESSION['current_box_id'] = $boxId;
 
         $url = RouteContext::fromRequest($rq)->getRouteParser()->urlFor('categoriesList');
 

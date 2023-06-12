@@ -22,12 +22,16 @@
                     <img src="{{ image }}" alt="Image de {{ prestation.libelle }}" class="mx-auto d-block">
                 </div>
 
-                <form method="POST" action="{{ postActionRoute }}" class="my-4">
+                <form method="POST" action="{{ postActionRoute }}" class="my-4 row">
                     <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
                     <input type="hidden" name="presta_id" id="presta_id" value="{{ prestation.id }}">
 
-
-                    <button type="submit" class="btn btn-primary"><i class="bi bi-plus-lg"></i> Ajouter au coffret en cours</button>
+                    <div class="input-group mb-3">
+                        <div class="col-md-3">
+                            <input type="number" min="1" class="form-control" placeholder="Quantité" id="qty" name="qty">
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary"><i class="bi bi-plus-lg"></i> Ajouter au coffret en cours</button>
+                    </div>
                 </form>
             </div>
         </div>
