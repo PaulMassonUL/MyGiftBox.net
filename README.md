@@ -21,7 +21,7 @@
 - [ ] [ETENDU] Créer un coffret prérempli à partir d'une box affichée
 ### Inscription, authentification :
 - [x] Signin
-- [ ] Register
+- [x] Register
 - [ ] Accéder à ses coffrets
 ### URL d'accès :
 - [ ] Génération de l'URL d'accès

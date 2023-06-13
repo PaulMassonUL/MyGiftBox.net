@@ -187,6 +187,6 @@ INSERT INTO `prestation` (`id`, `libelle`, `description`, `url`, `unite`, `tarif
 
 -- TEST USER
 INSERT INTO `user` (`email`, `password`, `nom`, `prenom`, `created_at`, `updated_at`) VALUES
-('testuser@mail.com', '$2y$12$U5b0KIrcAPM3pLFzMuzsz.5e3X5Uy4vjUVBGNDrYTaTrXIGaNLH7S', 'User', 'Test', '2023-06-12 14:50:24', '2023-06-12 14:50:24');
+('testuser@mail.com', '$2y$12$U5b0KIrcAPM3pLFzMuzsz.5e3X5Uy4vjUVBGNDrYTaTrXIGaNLH7S', 'User', 'Test', '2023-06-12 14:50:24', '0000-00-00 00:00:00');
 
 -- 2023-04-07 14:50:24

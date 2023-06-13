@@ -1,0 +1,42 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block giftmain %}
+
+    <div class="container col-md-5">
+        <h1 class="text-center mb-4">Inscription</h1>
+        {% if disconnected %}
+            <div class="alert alert-primary">Vous avez été déconnecté.</div>
+        {% endif %}
+        <form action="{{ url_for('registered') }}" method="POST">
+            <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+            <div class="form-group mb-3">
+                <label for="email">Adresse e-mail</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Entrez votre adresse e-mail" value="{{ data.email }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="prenom">Prénom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Entrez votre prénom" value="{{ data.prenom }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" id="nom" name="nom" placeholder="Entrez votre nom" value="{{ data.nom }}" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+            </div>
+            <div class="form-group mb-3">
+                <label for="confirm_password">Confirmez le mot de passe</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirmez votre mot de passe" required>
+            </div>
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">S'inscrire</button>
+        </form>
+        <p class="text-center my-4">Déjà inscrit ? <a href="{{ url_for('signin') }}">Se connecter</a></p>
+    </div>
+
+{% endblock %}
