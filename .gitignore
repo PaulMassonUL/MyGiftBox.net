@@ -27,3 +27,8 @@
 ##### Project config files
 *.ini
 .env
+
+
+##### draw.io temp files
+*.bkp
+*.dtmp

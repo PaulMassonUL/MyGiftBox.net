@@ -6,13 +6,23 @@ use gift\app\actions\GetCategoriesAction;
 use gift\app\actions\GetCategoriesCreateAction;
 use gift\app\actions\GetPrestationAction;
 use gift\app\actions\GetPrestationsAction;
+use gift\app\actions\GetRegisterAction;
+use gift\app\actions\GetSigninAction;
 use gift\app\actions\PostBoxAddPrestationAction;
 use gift\app\actions\PostBoxesCreateAction;
 use gift\app\actions\PostCategoriesCreateAction;
+use gift\app\actions\PostRegisterAction;
+use gift\app\actions\PostSigninAction;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
 return function (\Slim\App $app): void {
+
+    $app->get('/signin[/]', GetSigninAction::class)->setName('signin');
+    $app->post('/signin[/]', PostSigninAction::class)->setName('signedIn');
+
+    $app->get('/register[/]', GetRegisterAction::class)->setName('register');
+    $app->post('/register[/]', PostRegisterAction::class)->setName('registered');
 
     $app->get('/categories/new[/]', GetCategoriesCreateAction::class)->setName('categoriesCreate');
     $app->post('/categories/new[/]', PostCategoriesCreateAction::class)->setName('categoriesCreated');
