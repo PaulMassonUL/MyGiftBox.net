@@ -51,4 +51,42 @@ CREATE TABLE `box2presta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS `BoxTemplate`;
+CREATE TABLE `BoxTemplate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `libelle` varchar(128) NOT NULL,
+  `description` text NOT NULL,
+  `montant` decimal(12,2) NOT NULL DEFAULT 0.00,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `template2presta`;
+CREATE TABLE `template2presta` (
+  `template_id` int(11) NOT NULL,
+  `presta_id` varchar(128) NOT NULL,
+  `quantite` int(11) NOT NULL,
+  PRIMARY KEY (`template_id`, `presta_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `box2user`;
+CREATE TABLE `box2user` (
+  `box_id` varchar(128) NOT NULL,
+  `user_id` varchar(128) NOT NULL,
+  PRIMARY KEY (`box_id`, `user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `email` varchar(128) NOT NULL,
+  `password` text NOT NULL,
+  `nom` varchar(128) NOT NULL,
+  `prenom` varchar(128) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp(),
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- 2023-04-07 14:49:49

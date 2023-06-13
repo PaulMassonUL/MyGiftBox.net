@@ -4,7 +4,6 @@ namespace gift\app\services\box;
 
 use gift\app\models\Box;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 
 class BoxService
