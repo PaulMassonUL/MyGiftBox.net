@@ -1,0 +1,64 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Coffret {{ box.libelle }}{% endblock %}
+
+{% block giftmain %}
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <h1> Coffret : {{ box.libelle }}</h1>
+                <p>Description : {{ box.description }}</p>
+
+                <div class="badge text-bg-success fs-6">
+                    Montant total : {{ box.montant }} €
+                </div>
+                </br>
+                <button type="submit" class="btn btn-primary mt-2">Valider</button>
+
+                {% if box.prestations %}
+                    {% for presta in box.prestations %}
+                        <div class="row g-4 mb-2 mt-2">
+                            <div class="col-12">
+                                <div class="card h-100 presta-card">
+                                    <div class="d-flex flex-row align-items-center">
+                                        <div class="col-4 text-center">
+                                            <img class="card-img-top img-fluid" src="../../../img/{{ presta.img }}" alt="{{ presta.libelle }}" style="max-width: 100%; max-height: 200px;">
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{ presta.libelle }}</h4>
+                                                <p class="card-text" style="white-space: pre-wrap;">Description: {{ presta.description }}</p>
+                                                <p class="card-text" style="white-space: pre-wrap;">Catégorie: {{ presta.categorie.libelle }}</p>
+                                                <p class="card-text" style="white-space: pre-wrap;">Prix: <span class="presta-price">{{ presta.tarif }} €</span></p>
+                                            </div>
+                                            <form method="POST" action="{{ postActionRoute }}" class="my-2 row ms-1">
+                                                <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+                                                <input type="hidden" name="presta_id" id="presta_id" value="{{ presta.id }}">
+
+                                                <div class="input-group mb-3">
+                                                    <div class="col-md-3">
+                                                        <input type="number" min="1" class="form-control" placeholder="Quantité" id="qty" name="qty" value= {{ presta.quantite }}>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-outline-primary" name="maj" id="maj">Mettre à jour </button>
+                                                    <button type="submit" class="btn btn-outline-danger" name="del" id="del"><i class="bi bi-trash3"></i> Supprimer </button>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
+                {% else %}
+                <p class="text-center text-muted mt-5 mb-5 h5">Le coffret est vide.</p>
+            {% endif %}
+
+
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

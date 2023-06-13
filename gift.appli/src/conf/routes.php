@@ -1,5 +1,6 @@
 <?php
 
+use gift\app\actions\GetBoxAction;
 use gift\app\actions\GetBoxesCreateAction;
 use gift\app\actions\GetCategorieAction;
 use gift\app\actions\GetCategoriesAction;
@@ -9,6 +10,7 @@ use gift\app\actions\GetPrestationsAction;
 use gift\app\actions\GetRegisterAction;
 use gift\app\actions\GetSigninAction;
 use gift\app\actions\PostBoxAddPrestationAction;
+use gift\app\actions\PostBoxAction;
 use gift\app\actions\PostBoxesCreateAction;
 use gift\app\actions\PostCategoriesCreateAction;
 use gift\app\actions\PostRegisterAction;
@@ -39,4 +41,8 @@ return function (\Slim\App $app): void {
     $app->post('/coffrets/new[/]', PostBoxesCreateAction::class)->setName('boxesCreated');
 
     $app->post('/categories/{cat_id}/prestations/add[/]', PostBoxAddPrestationAction::class)->setName('boxAddPrestation');
+
+    $app->get('/coffrets/{box_id}[/]', GetBoxAction::class)->setName('box');
+    $app->post('/coffrets/{box_id}[/]', PostBoxAction::class)->setName('boxEdit');
+
 };

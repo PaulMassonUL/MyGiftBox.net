@@ -21,7 +21,7 @@ class Box extends \Illuminate\Database\Eloquent\Model
         return $this->belongsToMany(Prestation::class, 'box2presta', 'box_id', 'presta_id')->withPivot('quantite');
     }
 
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class, 'box2user', 'box_id', 'user_id');
     }
