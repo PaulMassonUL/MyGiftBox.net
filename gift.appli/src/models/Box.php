@@ -9,6 +9,7 @@ class Box extends \Illuminate\Database\Eloquent\Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $keyType = 'string';
+    public $incrementing = false;
 
     const STATUS_CREATED = 1;
     const STATUS_VALIDATED = 2;

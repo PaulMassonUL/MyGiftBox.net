@@ -2,23 +2,24 @@
 
 namespace gift\app\actions;
 
-use gift\app\services\utils\CsrfService;
+use gift\app\services\box\BoxService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
-class GetBoxesCreateAction extends Action
+class GetBoxesAction extends Action
 {
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
         if (!isset($_SESSION['user'])) return $rs->withStatus(302)->withHeader('Location', RouteContext::fromRequest($rq)->getRouteParser()->urlFor('signin'));
 
-        $token = CsrfService::generate();
+        $boxService = new BoxService();
+        $boxes = $boxService->getBoxesByUser($_SESSION['user']);
 
         $view = Twig::fromRequest($rq);
-        return $view->render($rs, 'GetBoxesCreateView.twig',
-            ['token' => $token]
+        return $view->render($rs, 'GetBoxesView.twig',
+            ['boxes' => $boxes]
         );
     }
 }

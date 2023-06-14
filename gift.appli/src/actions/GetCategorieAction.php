@@ -7,7 +7,6 @@ use gift\app\services\prestations\PrestationsService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpBadRequestException;
-use Slim\Exception\HttpNotFoundException;
 use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
@@ -20,7 +19,7 @@ class GetCategorieAction extends Action
 
             $prestationsService = new PrestationsService();
             $categorie = $prestationsService->getCategorieById($args['id']);
-        } catch (CategorieNotFoundException $e) {
+        } catch (CategorieNotFoundException) {
             throw new HttpBadRequestException($rq, "Impossible de trouver la catégorie " . $args['id']);
         }
 

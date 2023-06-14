@@ -8,6 +8,7 @@ use gift\app\services\utils\CsrfException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 
 class PostRegisterAction extends Action
@@ -38,7 +39,7 @@ class PostRegisterAction extends Action
             }
 
             $_SESSION['user'] = $email;
-            return $rs->withStatus(302)->withHeader('Location', '/categories');
+            return $rs->withStatus(302)->withHeader('Location', RouteContext::fromRequest($rq)->getRouteParser()->urlFor('boxesList'));
         } catch (RegistrationFailedException $e) {
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'GetRegisterView.twig', [

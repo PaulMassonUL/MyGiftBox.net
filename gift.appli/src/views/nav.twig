@@ -9,7 +9,7 @@
                 <a class="nav-link px-4" href="#">Prestations</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link px-4" href="#">Mes coffrets</a>
+                <a class="nav-link px-4" href="{{ url_for('boxesList') }}">Mes coffrets</a>
             </li>
             {% if isUserLoggedIn() %}
                 <li class="nav-item">

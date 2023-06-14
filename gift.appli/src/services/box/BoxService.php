@@ -3,6 +3,7 @@
 namespace gift\app\services\box;
 
 use gift\app\models\Box;
+use gift\app\models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Ramsey\Uuid\Uuid;
 
@@ -12,8 +13,7 @@ class BoxService
     {
         if (isset($data['libelle']) && isset($data['description'])) {
             $box = new Box();
-            $uuid = Uuid::uuid4()->toString();
-            $box->id = $uuid;
+            $box->id = Uuid::uuid4()->toString();
             $box->token = bin2hex(random_bytes(32));
             $box->libelle = $data['libelle'];
             $box->description = $data['description'];
@@ -21,7 +21,12 @@ class BoxService
             $box->kdo = isset($data['kdo']) ? 1 : 0;
             $box->message_kdo = $data['message_kdo'] ?? "";
             $box->statut = $box::STATUS_CREATED;
-            if ($box->save()) return $uuid;
+            if ($box->save()) {
+                $box->users()->attach($_SESSION['user']);
+                return $box->id;
+            } else {
+                throw new \Exception('Failed to save box during box creation');
+            }
         }
         throw new \Exception('Missing libelle or description in box creation');
     }
@@ -65,8 +70,18 @@ class BoxService
         }
     }
 
-    //get box by id
+    public function getBoxesByUser(string $user_id): array
+    {
+        try {
+            $user = User::with('boxes')->findOrFail($user_id);
+            return $user->boxes->toArray();
+        } catch (ModelNotFoundException $e) {
+            throw new ModelNotFoundException("User not found during getBoxesByUser");
+        }
 
+    }
+
+    //get box by id
     /**
      * @throws BoxNotFoundException
      */
@@ -95,6 +110,7 @@ class BoxService
             throw new BoxNotFoundException();
         }
     }
+
 
     public function removePrestationFromBox(mixed $presta_id, mixed $box_id)
     {

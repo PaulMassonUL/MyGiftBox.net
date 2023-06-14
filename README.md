@@ -22,7 +22,7 @@
 ### Inscription, authentification :
 - [x] Signin
 - [x] Register
-- [ ] Accéder à ses coffrets
+- [x] Accéder à ses coffrets
 ### URL d'accès :
 - [ ] Génération de l'URL d'accès
 - [ ] Accès au coffret

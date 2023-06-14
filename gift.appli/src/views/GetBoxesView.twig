@@ -1,0 +1,52 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Mes coffrets{% endblock %}
+
+{% block giftmain %}
+    <div class="d-flex align-items-center mb-2 justify-content-between flex-wrap">
+        <h1>Mes coffrets{% if boxes %}<span class="badge bg-secondary mx-3">{{ boxes|length }}</span>{% endif %}</h1>
+        <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false"><i class="bi bi-plus-lg"></i> Créer un nouveau coffret
+        </button>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="{{ url_for('boxesCreate') }}">Nouveau</a>
+            <a class="dropdown-item" href="{{ url_for('boxesList') }}">À partir d'un coffret prédéfini</a>
+        </div>
+    </div>
+
+    {% if boxes %}
+        <div class="card-deck">
+            {% for box in boxes %}
+                <a href="{{ url_for('box', {'box_id': box.id}) }}" class="card box h-100 my-2">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col p-0">
+                                <div class="card-body p-2">
+                                    <h5 class="card-title box-title fw-bold text-primary m-0" title="{{ box.libelle }}">{{ box.libelle }}</h5>
+                                    <p class="card-text box-description m-0" title="{{ box.description }}">{{ box.description }}</p>
+                                    <h5 class="card-text box-price mb-1"><span class="badge bg-dark">{{ box.montant|e }} €</span></h5>
+                                    <div class="text-muted timestamps small">Créé le {{ box.created_at|date('d/m/Y') }} •
+                                        Dernière
+                                        modification le {{ box.updated_at|date('d/m/Y') }}
+                                        à {{ box.updated_at|date('H:i') }}</div>
+                                </div>
+                            </div>
+                            <div class="col-auto p-0 d-flex align-items-center justify-content-end">
+                                {% if box.kdo %}
+                                    <div class="ml-auto me-2" title="{{ box.message_kdo }}">
+                                        <span class="bi bi-gift display-6"></span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center text-muted mt-5 h5">Vous n'avez pas encore de coffret.</p>
+        <p class="text-center mb-5 h5"><a href="{{ url_for('boxesCreate') }}"
+                                          class="link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Créer
+                un coffret</a></p>
+    {% endif %}
+{% endblock %}

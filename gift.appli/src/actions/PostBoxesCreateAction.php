@@ -16,9 +16,10 @@ class PostBoxesCreateAction extends Action
     {
         $data = $rq->getParsedBody();
 
+        if (!isset($_SESSION['user'])) return $rs->withStatus(302)->withHeader('Location', RouteContext::fromRequest($rq)->getRouteParser()->urlFor('signin'));
+
         //Verification du token transmis par le formulaire
         $token = $data['csrf_token'] ?? null;
-
         try{
             CsrfService::check($token);
         }catch (CsrfException){
@@ -33,8 +34,6 @@ class PostBoxesCreateAction extends Action
 
         $_SESSION['current_box_id'] = $boxId;
 
-        $url = RouteContext::fromRequest($rq)->getRouteParser()->urlFor('categoriesList');
-
-        return $rs->withStatus(302)->withHeader('Location', $url);
+        return $rs->withStatus(302)->withHeader('Location', RouteContext::fromRequest($rq)->getRouteParser()->urlFor('boxesList'));
     }
 }
