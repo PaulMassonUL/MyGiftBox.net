@@ -17,11 +17,10 @@ class PostBoxAction extends Action
     {
         $data = $rq->getParsedBody();
 
-
         $boxService = new BoxService();
-        if(!$boxService->isBoxOwner($args['box_id'], $_SESSION['user'])){
-            throw new HttpBadRequestException($rq,"Vous n'êtes pas autorisé à accéder à ce coffret");
-        }
+        //if(!$boxService->isBoxOwner($args['box_id'], $_SESSION['user'])){
+        //throw new HttpBadRequestException($rq,"Vous n'êtes pas autorisé à accéder à ce coffret");
+        //}
 
         //Verification du token transmis par le formulaire
         $token = $data['csrf_token'] ?? null;
@@ -30,6 +29,10 @@ class PostBoxAction extends Action
             CsrfService::check($token);
         } catch (CsrfException) {
             throw new CsrfException("Invalid CSRF token");
+        }
+
+        if(isset($data['validate'])) {
+            $boxService->validateBox($args['box_id']);
         }
 
         if (isset($data['presta_id']) && isset($args['box_id'])) {

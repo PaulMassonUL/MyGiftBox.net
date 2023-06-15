@@ -6,10 +6,12 @@ use gift\app\actions\GetBoxesCreateAction;
 use gift\app\actions\GetCategorieAction;
 use gift\app\actions\GetCategoriesAction;
 use gift\app\actions\GetCategoriesCreateAction;
+use gift\app\actions\GetPaiementAction;
 use gift\app\actions\GetPrestationAction;
 use gift\app\actions\GetPrestationsAction;
 use gift\app\actions\GetRegisterAction;
 use gift\app\actions\GetSigninAction;
+use gift\app\actions\GetValidateBoxAction;
 use gift\app\actions\PostBoxAddPrestationAction;
 use gift\app\actions\PostBoxAction;
 use gift\app\actions\PostBoxesCreateAction;
@@ -48,4 +50,7 @@ return function (\Slim\App $app): void {
     $app->get('/coffrets/{box_id}[/]', GetBoxAction::class)->setName('box');
     $app->post('/coffrets/{box_id}[/]', PostBoxAction::class)->setName('boxEdit');
 
+    $app->get('/coffrets/{box_id}/validate[/]', GetValidateBoxAction::class)->setName('boxValidate');
+
+    $app->get('/coffrets/{box_id}/paiement[/]', GetPaiementAction::class)->setName('boxPaiement');
 };

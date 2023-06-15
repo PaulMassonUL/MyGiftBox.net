@@ -32,8 +32,8 @@
 - [ ] Api : liste des prestation d'une catégorie
 - [ ] Api : accès à un coffret
 ### Gestion / modification du coffret :
-- [ ] Affichage d'un coffret
-- [ ] Validation d'un coffret
-- [ ] Paiement d'un coffret
-- [ ] Modification d'un coffret : suppression de prestations
-- [ ] [ETENDU] Modification d'un coffret : modification des quantités
+- [x] Affichage d'un coffret
+- [x] Validation d'un coffret
+- [x] Paiement d'un coffret
+- [x] Modification d'un coffret : suppression de prestations
+- [x] [ETENDU] Modification d'un coffret : modification des quantités

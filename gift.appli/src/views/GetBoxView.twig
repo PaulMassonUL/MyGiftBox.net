@@ -15,7 +15,12 @@
                     Montant total : {{ box.montant }} €
                 </div>
                 </br>
-                <button type="submit" class="btn btn-primary mt-2">Valider</button>
+
+                {% if statut is defined and statut == 1 %}
+                    <a href="{{ url_for('boxValidate', {'box_id': box.id}) }}" class="btn btn-primary mt-2" id="validate" onclick="return confirm('Êtes-vous sûr de vouloir valider ?');">Valider</a>
+                {% elseif statut is defined and statut == 2 %}
+                    <a href="{{ url_for('boxPaiement', {'box_id': box.id}) }}" class="btn btn-primary mt-2" id="paid" onclick="return confirm('Êtes-vous sûr de vouloir valider ?');">Payer</a>
+                {% endif %}
 
                 {% if box.prestations %}
                     {% for presta in box.prestations %}

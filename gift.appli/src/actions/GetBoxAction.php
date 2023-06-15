@@ -20,13 +20,19 @@ class GetBoxAction
             $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
 
             $boxService = new BoxService();
+
+            //if(!$boxService->isBoxOwner($args['box_id'], $_SESSION['user'])){
+            //    throw new HttpBadRequestException($rq,"Vous n'êtes pas autorisé à accéder à ce coffret");
+            //}
+
             $box = $boxService->getBoxById($args['box_id']);
 
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'GetBoxView.twig', [
                 'box' => $box,
                 'editRoute' => $routeParser->urlFor('boxEdit', ['box_id' => $args['box_id']]),
-                'token' => CsrfService::generate()
+                'token' => CsrfService::generate(),
+                'statut' => $boxService->getBoxStatus($args['box_id']),
             ]);
         } catch (BoxNotFoundException $e) {
             throw new HttpBadRequestException($rq, "Impossible de trouver le coffret " . $args['box_id']);

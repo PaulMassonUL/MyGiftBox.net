@@ -3,8 +3,22 @@
 {% block title %}{{ categorie.libelle }}{% endblock %}
 
 {% block giftmain %}
-    <a href="{{ categoriesRoute }}">← Retour à la liste des catégories</a>
-    <h1>Catégorie {{ categorie.libelle }}</h1>
-    <p>{{ categorie.description }}</p>
-    <a href="{{ prestationsRoute }}">Voir les prestations</a>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title display-4 mb-4 text-center">Catégorie {{ categorie.libelle }}</h1>
+                        <p class="card-text text-center">{{ categorie.description }}</p>
+                        <div class="text-center">
+                            <a href="{{ prestationsRoute }}" class="btn btn-primary mt-4">Voir les prestations</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center my-5">
+                    <a href="{{ categoriesRoute }}" class="btn btn-secondary">← Retour à la liste des catégories</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
