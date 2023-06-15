@@ -145,19 +145,7 @@ class BoxService
         }
     }
 
-    //fonction connaitre le statut du coffret
-    public function getBoxStatus(string $box_id): int
-    {
-        try {
-            $box = Box::with('users')->findOrFail($box_id);
-            $statut = $box->statut;
-            return $statut;
-        } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during getBoxStatus");
-        }
-    }
-
-    public function validateBox(mixed $box_id): void
+    public function validateBox(string $box_id)
     {
         try {
             $box = Box::with('users')->findOrFail($box_id);
@@ -176,6 +164,19 @@ class BoxService
             $box->save();
         } catch (ModelNotFoundException) {
             throw new ModelNotFoundException("Box not found during payBox");
+        }
+    }
+
+    public function deleteBox(string $box_id)
+    {
+        try {
+            $box = Box::with('prestations', 'users')->findOrFail($box_id);
+
+            $box->prestations()->detach();
+            $box->users()->detach();
+            $box->delete();
+        } catch (ModelNotFoundException) {
+            throw new ModelNotFoundException("Box not found during deleteBox");
         }
     }
 

@@ -28,9 +28,10 @@ class GetPaiementAction extends Action
         $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
 
         $boxService = new BoxService();
+        $box = $boxService->getBoxById($args['box_id']);
+
         //user est bien propriétaire et box est validée
-        $box = Box::find($args['box_id']);
-        if (($box->statut == Box::STATUS_VALIDATED) && ($boxService->isBoxOwner($args['box_id'], $_SESSION['user']))){
+        if (($box['statut'] == Box::STATUS_VALIDATED) && ($boxService->isBoxOwner($args['box_id'], $_SESSION['user']))) {
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'GetPaiementView.twig', [
                 'box_id' => $args['box_id'],

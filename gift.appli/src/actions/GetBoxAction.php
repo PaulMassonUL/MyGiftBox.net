@@ -2,6 +2,7 @@
 
 namespace gift\app\actions;
 
+use gift\app\models\Box;
 use gift\app\services\box\BoxNotFoundException;
 use gift\app\services\box\BoxService;
 use gift\app\services\utils\CsrfService;
@@ -32,7 +33,14 @@ class GetBoxAction
                 'box' => $box,
                 'editRoute' => $routeParser->urlFor('boxEdit', ['box_id' => $args['box_id']]),
                 'token' => CsrfService::generate(),
-                'statut' => $boxService->getBoxStatus($args['box_id']),
+                'statut' => $box['statut'],
+                'statuts' => [
+                    'created' => Box::STATUS_CREATED,
+                    'validated' => Box::STATUS_VALIDATED,
+                    'paid' => Box::STATUS_PAID,
+                    'delivered' => Box::STATUS_DELIVERED,
+                    'opened' => Box::STATUS_OPENED
+                ]
             ]);
         } catch (BoxNotFoundException $e) {
             throw new HttpBadRequestException($rq, "Impossible de trouver le coffret " . $args['box_id']);

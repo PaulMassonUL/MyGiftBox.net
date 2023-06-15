@@ -1,6 +1,7 @@
 <?php
 
 use gift\app\actions\GetBoxAction;
+use gift\app\actions\GetBoxDeliveryAction;
 use gift\app\actions\GetBoxesAction;
 use gift\app\actions\GetBoxesCreateAction;
 use gift\app\actions\GetCategorieAction;
@@ -55,4 +56,7 @@ return function (\Slim\App $app): void {
 
     $app->get('/coffrets/{box_id}/paiement[/]', GetPaiementAction::class)->setName('boxPaiement');
     $app->post('/coffrets/{box_id}/paiement[/]', PostPaiementAction::class)->setName('boxPaid');
+
+    $app->get('/coffrets/c/{box_token}[/]', GetBoxDeliveryAction::class)->setName('boxDelivery');
+//    $app->post('/coffrets/c/{box_token}[/]', PostBoxDeliveryAction::class)->setName('boxDelivered');
 };
