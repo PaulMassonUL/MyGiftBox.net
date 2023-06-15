@@ -19,7 +19,7 @@
                 {% if statut is defined and statut == 1 %}
                     <a href="{{ url_for('boxValidate', {'box_id': box.id}) }}" class="btn btn-primary mt-2" id="validate" onclick="return confirm('Êtes-vous sûr de vouloir valider ?');">Valider</a>
                 {% elseif statut is defined and statut == 2 %}
-                    <a href="{{ url_for('boxPaiement', {'box_id': box.id}) }}" class="btn btn-primary mt-2" id="paid" onclick="return confirm('Êtes-vous sûr de vouloir valider ?');">Payer</a>
+                    <a href="{{ url_for('boxPaiement', {'box_id': box.id}) }}" class="btn btn-primary mt-2" id="paid">Payer</a>
                 {% endif %}
 
                 {% if box.prestations %}
@@ -38,7 +38,7 @@
                                                 <p class="card-text" style="white-space: pre-wrap;">Catégorie: {{ presta.categorie.libelle }}</p>
                                                 <p class="card-text" style="white-space: pre-wrap;">Prix: <span class="presta-price">{{ presta.tarif }} €</span></p>
                                             </div>
-                                            <form method="POST" action="{{ postActionRoute }}" class="my-2 row ms-1">
+                                            <form method="POST" action="{{ editRoute }}" class="my-2 row ms-1">
                                                 <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
                                                 <input type="hidden" name="presta_id" id="presta_id" value="{{ presta.id }}">
 

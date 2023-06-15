@@ -16,6 +16,7 @@ use gift\app\actions\PostBoxAddPrestationAction;
 use gift\app\actions\PostBoxAction;
 use gift\app\actions\PostBoxesCreateAction;
 use gift\app\actions\PostCategoriesCreateAction;
+use gift\app\actions\PostPaiementAction;
 use gift\app\actions\PostRegisterAction;
 use gift\app\actions\PostSigninAction;
 
@@ -53,4 +54,5 @@ return function (\Slim\App $app): void {
     $app->get('/coffrets/{box_id}/validate[/]', GetValidateBoxAction::class)->setName('boxValidate');
 
     $app->get('/coffrets/{box_id}/paiement[/]', GetPaiementAction::class)->setName('boxPaiement');
+    $app->post('/coffrets/{box_id}/paiement[/]', PostPaiementAction::class)->setName('boxPaid');
 };

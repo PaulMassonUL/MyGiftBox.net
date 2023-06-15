@@ -21,9 +21,9 @@ class GetBoxAction
 
             $boxService = new BoxService();
 
-            //if(!$boxService->isBoxOwner($args['box_id'], $_SESSION['user'])){
-            //    throw new HttpBadRequestException($rq,"Vous n'êtes pas autorisé à accéder à ce coffret");
-            //}
+            if(!$boxService->isBoxOwner($args['box_id'], $_SESSION['user'])){
+                throw new HttpBadRequestException($rq,"Vous n'êtes pas autorisé à accéder à ce coffret");
+            }
 
             $box = $boxService->getBoxById($args['box_id']);
 

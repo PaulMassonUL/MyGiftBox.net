@@ -157,7 +157,7 @@ class BoxService
         }
     }
 
-    public function validateBox(mixed $box_id)
+    public function validateBox(mixed $box_id): void
     {
         try {
             $box = Box::with('users')->findOrFail($box_id);
@@ -165,6 +165,17 @@ class BoxService
             $box->save();
         } catch (ModelNotFoundException) {
             throw new ModelNotFoundException("Box not found during validateBox");
+        }
+    }
+
+    public function payBox(mixed $box_id): void
+    {
+        try {
+            $box = Box::with('users')->findOrFail($box_id);
+            $box->statut = Box::STATUS_PAID;
+            $box->save();
+        } catch (ModelNotFoundException) {
+            throw new ModelNotFoundException("Box not found during payBox");
         }
     }
 

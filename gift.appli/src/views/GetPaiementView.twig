@@ -10,25 +10,29 @@
                 <h1 class="text-center mb-4">Paiement du coffret</h1>
                 <hr>
 
-                <form>
+                <form method="POST" action="{{ paiementRoute }}" class="my-4">
+
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+
                     <div class="form-group">
                         <label for="cardNumber">Numéro de carte</label>
-                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                        <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456"
+                               maxlength="19" minlength="19" required>
                     </div>
 
                     <div class="form-group">
                         <label>Date d'expiration</label>
-                        <input type="date" class="form-control" id="expiryDate">
+                        <input type="date" class="form-control" id="expiryDate" required>
                     </div>
 
                     <div class="form-group">
                         <label for="cvv">CVV</label>
-                        <input type="text" class="form-control" id="cvv" placeholder="123" maxlength="3">
+                        <input type="text" class="form-control" id="cvv" placeholder="123" maxlength="3" minlength="3" required>
                     </div>
 
                     <div class="form-group mt-4">
                         <label for="cardholderName">Nom du titulaire de la carte</label>
-                        <input type="text" class="form-control" id="cardholderName" placeholder="John Doe">
+                        <input type="text" class="form-control" id="cardholderName" placeholder="John Doe" minlength="2" required>
                     </div>
 
                     <div class="d-flex align-items-center justify-content-between flex-wrap mt-4">
@@ -42,10 +46,10 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             var cardNumberInput = document.getElementById('cardNumber');
 
-            cardNumberInput.addEventListener('input', function(e) {
+            cardNumberInput.addEventListener('input', function (e) {
                 var inputValue = e.target.value.replace(/\s/g, ''); // Supprime les espaces existants
                 var formattedValue = formatCardNumber(inputValue); // Formate le numéro de carte avec des espaces
 

@@ -14,7 +14,7 @@ use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 
-class GetPaiementAction extends Action
+class PostPaiementAction extends Action
 {
 
     /**
@@ -25,14 +25,22 @@ class GetPaiementAction extends Action
      */
     public function __invoke(Request $rq, Response $rs, array $args): Response
     {
+
+        //redirection après avoir payé vers PostPaiementAction.twig
+
+        //Verification du token transmis par le formulaire
+        $token = $data['csrf_token'] ?? null;
+
         $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
 
         $boxService = new BoxService();
+
         //user est bien propriétaire et box est validée
         $box = Box::find($args['box_id']);
         if (($box->statut == Box::STATUS_VALIDATED) && ($boxService->isBoxOwner($args['box_id'], $_SESSION['user']))){
+            $boxService->payBox($args['box_id']);
             $view = Twig::fromRequest($rq);
-            return $view->render($rs, 'GetPaiementView.twig', [
+            return $view->render($rs, 'PostPaiementAction.twig', [
                 'box_id' => $args['box_id'],
                 'token' => CsrfService::generate(),
                 'paiementRoute' => $routeParser->urlFor('boxPaid', ['box_id' => $args['box_id']]),
@@ -40,5 +48,7 @@ class GetPaiementAction extends Action
         } else {
             throw new Exception("La box n'est pas validée et/ou ne vous appartient pas");
         }
+
+
     }
 }
