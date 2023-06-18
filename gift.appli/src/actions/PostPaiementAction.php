@@ -5,10 +5,10 @@ namespace gift\app\actions;
 use Exception;
 use gift\app\models\Box;
 use gift\app\services\box\BoxService;
+use gift\app\services\utils\CsrfException;
 use gift\app\services\utils\CsrfService;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Routing\RouteContext;
 use Slim\Views\Twig;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -30,8 +30,11 @@ class PostPaiementAction extends Action
 
         //Verification du token transmis par le formulaire
         $token = $data['csrf_token'] ?? null;
-
-        $routeParser = RouteContext::fromRequest($rq)->getRouteParser();
+        try {
+            CsrfService::check($token);
+        } catch (CsrfException) {
+            throw new CsrfException("Invalid CSRF token");
+        }
 
         $boxService = new BoxService();
         $box = $boxService->getBoxById($args['box_id']);
@@ -42,7 +45,6 @@ class PostPaiementAction extends Action
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'PostPaiementAction.twig', [
                 'box_id' => $args['box_id'],
-                'paiementRoute' => $routeParser->urlFor('boxPaid', ['box_id' => $args['box_id']]),
             ]);
         } else {
             throw new Exception("La box n'est pas validée et/ou ne vous appartient pas");
