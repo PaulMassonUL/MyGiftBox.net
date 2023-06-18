@@ -29,31 +29,31 @@ Suivez ces étapes pour installer MyGiftBox :
 
 ## Fonctionnalitées
 ### Catalogue des prestations :
-- [x] Afficher la liste des prestations
-- [x] Afficher le détail d'une prestation
-- [x] Liste de prestations par catégories
-- [x] Liste de catégories
-- [x] [ETENDU] Tri par prix
+- [x] Afficher la liste des prestations (Paul)
+- [x] Afficher le détail d'une prestation (Paul)
+- [x] Liste de prestations par catégories (Paul)
+- [x] Liste de catégories (Mathis)
+- [x] [ETENDU] Tri par prix (Paul)
 ### Création du coffret :
-- [x] Création d'un coffret vide
-- [x] Ajout de prestations dans le coffret
-- [x] Créer un coffret prérempli à partir d'une box
+- [x] Création d'un coffret vide (Paul)
+- [x] Ajout de prestations dans le coffret (Paul)
+- [x] Créer un coffret prérempli à partir d'une box (Paul)
 - [ ] [ETENDU] Créer un coffret prérempli à partir d'une box affichée
 ### Inscription, authentification :
-- [x] Signin
-- [x] Register
-- [x] Accéder à ses coffrets
+- [x] Signin (Paul)
+- [x] Register (Paul)
+- [x] Accéder à ses coffrets (Paul)
 ### URL d'accès :
-- [x] Génération de l'URL d'accès
-- [x] Accès au coffret
+- [x] Génération de l'URL d'accès (Paul)
+- [x] Accès au coffret (Paul)
 ### API :
-- [x] Api : liste des prestations
-- [x] Api : liste des catégories
-- [X] Api : liste des prestation d'une catégorie
-- [x] Api : accès à un coffret
+- [x] Api : liste des prestations (Mathis)
+- [x] Api : liste des catégories (Paul)
+- [X] Api : liste des prestation d'une catégorie (Mathis)
+- [x] Api : accès à un coffret (Paul)
 ### Gestion / modification du coffret :
-- [x] Affichage d'un coffret
-- [x] Validation d'un coffret
-- [x] Paiement d'un coffret
-- [x] Modification d'un coffret : suppression de prestations
-- [x] [ETENDU] Modification d'un coffret : modification des quantités
+- [x] Affichage d'un coffret (Mathis)
+- [x] Validation d'un coffret (Mathis)
+- [x] Paiement d'un coffret (Mathis)
+- [x] Modification d'un coffret : suppression de prestations (Mathis)
+- [x] [ETENDU] Modification d'un coffret : modification des quantités (Mathis)
