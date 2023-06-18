@@ -27,9 +27,6 @@ class PostRegisterAction extends Action
         }
 
         try {
-            $auth = new AuthenticationService();
-            $email = $auth->register($data);
-
             //Verification du token transmis par le formulaire
             $token = $data['csrf_token'] ?? null;
             try {
@@ -37,6 +34,9 @@ class PostRegisterAction extends Action
             } catch (CsrfException) {
                 throw new CsrfException("Invalid CSRF token");
             }
+
+            $auth = new AuthenticationService();
+            $email = $auth->register($data);
 
             $_SESSION['user'] = $email;
             return $rs->withStatus(302)->withHeader('Location', RouteContext::fromRequest($rq)->getRouteParser()->urlFor('boxesList'));

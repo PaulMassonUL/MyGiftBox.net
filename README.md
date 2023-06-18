@@ -45,12 +45,12 @@ Suivez ces étapes pour installer MyGiftBox :
 - [x] Accéder à ses coffrets
 ### URL d'accès :
 - [x] Génération de l'URL d'accès
-- [ ] Accès au coffret
+- [x] Accès au coffret
 ### API :
 - [ ] Api : liste des prestations
-- [ ] Api : liste des catégories
+- [x] Api : liste des catégories
 - [ ] Api : liste des prestation d'une catégorie
-- [ ] Api : accès à un coffret
+- [x] Api : accès à un coffret
 ### Gestion / modification du coffret :
 - [x] Affichage d'un coffret
 - [x] Validation d'un coffret

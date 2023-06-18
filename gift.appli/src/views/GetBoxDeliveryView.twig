@@ -1,9 +1,25 @@
 {% extends "gift.skeleton.twig" %}
 
-{% block title %} {% endblock %}
+{% block title %}Vous avez reçu un coffret !{% endblock %}
 
 {% block giftmain %}
 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="jubmotron text-center">
+                    <h1>Vous avez reçu un coffret de la part de {{ user.prenom }} {{ user.nom }} !</h1>
+                    <hr>
+                    <h3>{{ box.libelle }}</h3>
+                    <form method="post" action="{{ url_for('boxDelivered', {box_token: box.token}) }}" class="my-4">
+                        <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
+                        <button type="submit" class="btn btn-success"><i class="bi bi-key"></i> Ouvrir le coffret</button>
+                    </form>
+                    <p class="text-muted">{{ user.prenom }} {{ user.nom }} sera informé de l'ouverture de son coffret.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}

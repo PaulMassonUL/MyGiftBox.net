@@ -55,7 +55,7 @@ class BoxService
         }
     }
 
-    public function editPrestationQuantity(string $id_presta, string $id_box, int $quantite) : void
+    public function editPrestationQuantity(string $id_presta, string $id_box, int $quantite): void
     {
         try {
             $box = Box::with('prestations')->findOrFail($id_box);
@@ -76,12 +76,13 @@ class BoxService
             $user = User::with('boxes')->findOrFail($user_id);
             return $user->boxes->toArray();
         } catch (ModelNotFoundException $e) {
-            throw new ModelNotFoundException("User not found during getBoxesByUser");
+            throw new BoxNotFoundException("User not found during getBoxesByUser");
         }
 
     }
 
     //get box by id
+
     /**
      * @throws BoxNotFoundException
      */
@@ -122,7 +123,7 @@ class BoxService
             });
             $box->save();
         } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during removePrestationFromBox");
+            throw new BoxNotFoundException();
         }
     }
 
@@ -141,7 +142,7 @@ class BoxService
                 return false;
             }
         } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during isBoxOwner");
+            throw new BoxNotFoundException();
         }
     }
 
@@ -152,18 +153,18 @@ class BoxService
             $box->statut = Box::STATUS_VALIDATED;
             $box->save();
         } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during validateBox");
+            throw new BoxNotFoundException();
         }
     }
 
     public function payBox(mixed $box_id): void
     {
         try {
-            $box = Box::with('users')->findOrFail($box_id);
+            $box = Box::findOrFail($box_id);
             $box->statut = Box::STATUS_PAID;
             $box->save();
         } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during payBox");
+            throw new BoxNotFoundException();
         }
     }
 
@@ -176,8 +177,39 @@ class BoxService
             $box->users()->detach();
             $box->delete();
         } catch (ModelNotFoundException) {
-            throw new ModelNotFoundException("Box not found during deleteBox");
+            throw new BoxNotFoundException();
         }
     }
 
+    public function getBoxByToken(string $box_token): array
+    {
+        try {
+            $box = Box::with('prestations', 'users')->where('token', $box_token)->firstOrFail();
+            return $box->toArray();
+        } catch (ModelNotFoundException) {
+            throw new BoxNotFoundException();
+        }
+    }
+
+    public function deliverBox(string $box_id): void
+    {
+        try {
+            $box = Box::findOrFail($box_id);
+            $box->statut = Box::STATUS_DELIVERED;
+            $box->save();
+        } catch (ModelNotFoundException) {
+            throw new BoxNotFoundException();
+        }
+    }
+
+    public function openBox(string $box_id): void
+    {
+        try {
+            $box = Box::findOrFail($box_id);
+            $box->statut = Box::STATUS_OPENED;
+            $box->save();
+        } catch (ModelNotFoundException) {
+            throw new BoxNotFoundException();
+        }
+    }
 }

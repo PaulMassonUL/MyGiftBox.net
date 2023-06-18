@@ -23,7 +23,7 @@
                                     class="bi bi-check-lg"></i> Valider le coffret</a>
                     {% endif %}
                     {% if statut == statuts.validated %}
-                        <a href="{{ url_for('boxPaiement', {'box_id': box.id}) }}" class="btn btn-primary" id="paid">Payer</a>
+                        <a href="{{ url_for('boxPaiement', {'box_id': box.id}) }}" class="btn btn-primary" id="paid">Payer le coffret</a>
                     {% endif %}
                     <form method="POST" action="{{ url_for('boxEdit', {'box_id': box.id}) }}">
                         <input type="hidden" name="csrf_token" id="csrf_token" value="{{ token }}">
@@ -41,15 +41,18 @@
                     </form>
                 </div>
 
-                <div class="form-group">
-                    <label for="link" class="form-label text-warning fw-bold m-0">Lien de partage du coffret</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="link" value="{{ full_url_for('boxDelivery', {box_token: box.token}) }}" readonly>
-                        <button class="btn btn-warning" onclick="copyLink()">
-                            <span id="copyIcon" class="bi bi-link-45deg me-1"></span><span id="btn-text">Copier le lien</span>
-                        </button>
+                {% if statut == statuts.paid %}
+                    <div class="form-group">
+                        <label for="link" class="form-label text-warning fw-bold m-0">Lien de partage du coffret</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="link"
+                                   value="{{ full_url_for('boxDelivery', {box_token: box.token}) }}" readonly>
+                            <button class="btn btn-warning" onclick="copyLink()">
+                                <span id="copyIcon" class="bi bi-link-45deg me-1"></span><span id="btn-text">Copier le lien</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
 
                 <hr>
 
@@ -104,7 +107,7 @@
 
 
                 {% else %}
-                    <p class="text-center text-muted mt-5 mb-5 h5">Le coffret est vide.</p>
+                    <p class="text-center text-muted my-5 h5">Le coffret est vide.</p>
                 {% endif %}
 
 
@@ -127,7 +130,7 @@
 
             document.getElementById("btn-text").textContent = "Lien copié !";
 
-            setTimeout(function() {
+            setTimeout(function () {
                 copyIcon.classList.remove("bi-check-circle");
                 copyIcon.classList.add("bi-link-45deg");
                 document.getElementById("btn-text").textContent = "Copier le lien";

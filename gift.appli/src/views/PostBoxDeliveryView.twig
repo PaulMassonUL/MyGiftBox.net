@@ -1,0 +1,53 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Félicitations !{% endblock %}
+
+{% block giftmain %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <span class="icon icon-gift icon-5x"></span>
+                    <h1 class="mb-0">Félicitations ! Vous avez reçu un coffret {% if box.kdo %}cadeau {% endif %} de la
+                        part de {{ user.prenom }} {{ user.nom }}.</h1>
+                </div>
+                <hr>
+                <h2>{{ box.libelle }}</h2>
+                <p class="m-0">{{ box.description }}</p>
+                <h4 class="mt-4 text-decoration-underline">Ce coffret contient les produits suivants :</h4>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>Détail unité</th>
+                        <th>Quantité</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for presta in box.prestations %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>
+                                <a href="{{ presta.url is null ? '#' : presta.url }}"
+                                   class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                    <div>
+                                        <p class="m-0">{{ presta.libelle }}</p>
+                                        <p class="m-0 text-muted">{{ presta.description }}</p>
+                                    </div>
+                                </a>
+                            </td>
+                            <td>{{ presta.unite is null ? 'N/A' : presta.unite }}</td>
+                            <td>{{ presta.pivot.quantite }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <p class="text-muted mt-4">Vous pouvez contacter {{ user.prenom }} {{ user.nom }} par mail à
+                    l'adresse suivante : <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
