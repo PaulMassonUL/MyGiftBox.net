@@ -14,24 +14,10 @@ class PrestationsService
         return $categories->toArray();
     }
 
-    public function getCategorieById(int $id): array
+    public function getPrestations(): array
     {
-        try {
-            $categorie = Categorie::findOrfail($id);
-            return $categorie->toArray();
-        } catch (ModelNotFoundException) {
-            throw new CategorieNotFoundException();
-        }
-    }
-
-    public function getPrestationById(string $id): array
-    {
-        try {
-            $prestation = Prestation::findOrfail($id);
-            return $prestation->toArray();
-        } catch (ModelNotFoundException) {
-            throw new PrestationNotFoundException();
-        }
+        $prestations = Prestation::all();
+        return $prestations->toArray();
     }
 
     public function getPrestationsByCategorie(int $categ_id): array
