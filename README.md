@@ -49,7 +49,7 @@ Suivez ces étapes pour installer MyGiftBox :
 ### API :
 - [x] Api : liste des prestations
 - [x] Api : liste des catégories
-- [ ] Api : liste des prestation d'une catégorie
+- [X] Api : liste des prestation d'une catégorie
 - [x] Api : accès à un coffret
 ### Gestion / modification du coffret :
 - [x] Affichage d'un coffret
