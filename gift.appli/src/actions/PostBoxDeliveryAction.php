@@ -22,7 +22,7 @@ class PostBoxDeliveryAction
             $data = $rq->getParsedBody();
 
             //Verification du token transmis par le formulaire
-            $token = $data['csrf_token'] ?? null;
+            $token = $data['csrf_token'] ?? '';
             try {
                 CsrfService::check($token);
             } catch (CsrfException) {
@@ -41,7 +41,6 @@ class PostBoxDeliveryAction
             $view = Twig::fromRequest($rq);
             return $view->render($rs, 'PostBoxDeliveryView.twig', [
                 'box' => $box,
-                'user' => $box['users'][0],
             ]);
         } catch (BoxNotFoundException) {
             throw new HttpBadRequestException($rq, "Ce coffret n'existe pas.");

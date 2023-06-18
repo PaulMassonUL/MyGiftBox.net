@@ -30,8 +30,7 @@ class PostCategoriesCreateAction
         $data = $rq->getParsedBody();
 
         //Verification du token transmis par le formulaire
-        $token = $data['csrf_token'] ?? null;
-
+        $token = $data['csrf_token'] ?? '';
         try{
             CsrfService::check($token);
         }catch (CsrfException){

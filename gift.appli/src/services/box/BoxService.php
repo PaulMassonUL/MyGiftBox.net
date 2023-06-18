@@ -3,6 +3,7 @@
 namespace gift\app\services\box;
 
 use gift\app\models\Box;
+use gift\app\models\BoxTemplate;
 use gift\app\models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Ramsey\Uuid\Uuid;
@@ -208,6 +209,39 @@ class BoxService
             $box = Box::findOrFail($box_id);
             $box->statut = Box::STATUS_OPENED;
             $box->save();
+        } catch (ModelNotFoundException) {
+            throw new BoxNotFoundException();
+        }
+    }
+
+    public function getTemplateBoxes(): array
+    {
+        $boxes = BoxTemplate::with('prestations')->get();
+        return $boxes->toArray();
+    }
+
+    public function createBoxFromTemplate(string $template_id): string
+    {
+        try {
+            $template = BoxTemplate::with('prestations')->findOrFail($template_id);
+            $box = new Box();
+            $box->id = Uuid::uuid4()->toString();
+            $box->token = bin2hex(random_bytes(32));
+            $box->libelle = $template->libelle;
+            $box->description = $template->description;
+            $box->montant = $template->montant;
+            $box->kdo = 0;
+            $box->message_kdo = "";
+            $box->statut = $box::STATUS_CREATED;
+            if ($box->save()) {
+                $box->users()->attach($_SESSION['user']);
+                foreach ($template->prestations as $prestation) {
+                    $box->prestations()->attach($prestation->id, ['quantite' => $prestation->pivot->quantite]);
+                }
+                return $box->id;
+            } else {
+                throw new \Exception('Failed to save box during box creation with template');
+            }
         } catch (ModelNotFoundException) {
             throw new BoxNotFoundException();
         }

@@ -12,6 +12,7 @@ use gift\app\actions\GetPrestationAction;
 use gift\app\actions\GetPrestationsAction;
 use gift\app\actions\GetRegisterAction;
 use gift\app\actions\GetSigninAction;
+use gift\app\actions\GetTemplatesAction;
 use gift\app\actions\GetValidateBoxAction;
 use gift\app\actions\PostBoxAddPrestationAction;
 use gift\app\actions\PostBoxAction;
@@ -21,6 +22,7 @@ use gift\app\actions\PostCategoriesCreateAction;
 use gift\app\actions\PostPaiementAction;
 use gift\app\actions\PostRegisterAction;
 use gift\app\actions\PostSigninAction;
+use gift\app\actions\PostTemplatesAction;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -35,7 +37,7 @@ return function (\Slim\App $app): void {
     $app->get('/categories/new[/]', GetCategoriesCreateAction::class)->setName('categoriesCreate');
     $app->post('/categories/new[/]', PostCategoriesCreateAction::class)->setName('categoriesCreated');
 
-    $app->get('/categories[/]', GetCategoriesAction::class)->setName('categoriesList');
+    $app->get('[/]', GetCategoriesAction::class)->setName('categoriesList');
 
     $app->get('/categories/{id}[/]', GetCategorieAction::class)->setName('categorie');
 
@@ -60,4 +62,7 @@ return function (\Slim\App $app): void {
 
     $app->get('/coffrets/c/{box_token}[/]', GetBoxDeliveryAction::class)->setName('boxDelivery');
     $app->post('/coffrets/c/{box_token}[/]', PostBoxDeliveryAction::class)->setName('boxDelivered');
+
+    $app->get('/templates[/]', GetTemplatesAction::class)->setName('templatesList');
+    $app->get('/templates/add/{template_id}[/]', PostTemplatesAction::class)->setName('templatesPick');
 };

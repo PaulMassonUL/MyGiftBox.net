@@ -37,7 +37,7 @@ Suivez ces étapes pour installer MyGiftBox :
 ### Création du coffret :
 - [x] Création d'un coffret vide
 - [x] Ajout de prestations dans le coffret
-- [ ] Créer un coffret prérempli à partir d'une box
+- [x] Créer un coffret prérempli à partir d'une box
 - [ ] [ETENDU] Créer un coffret prérempli à partir d'une box affichée
 ### Inscription, authentification :
 - [x] Signin

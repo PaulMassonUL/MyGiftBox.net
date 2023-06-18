@@ -29,7 +29,7 @@ class PostPaiementAction extends Action
         //redirection après avoir payé vers PostPaiementAction.twig
 
         //Verification du token transmis par le formulaire
-        $token = $data['csrf_token'] ?? null;
+        $token = $data['csrf_token'] ?? '';
         try {
             CsrfService::check($token);
         } catch (CsrfException) {

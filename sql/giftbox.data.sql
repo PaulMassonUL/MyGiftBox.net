@@ -151,7 +151,7 @@ INSERT INTO `box2presta` (`box_id`, `presta_id`, `quantite`) VALUES
 
 INSERT INTO `categorie` (`id`, `libelle`, `description`) VALUES
 (1,	'restauration',	'restaurant, en cas, sur le pouce, livré ... toutes les façons de manger.'),
-(2,	'hébergement',	'hôtel, chambre d\'hôte, cabane dans les bois, appart\'hotel, ...'),
+(2,	'hébergement',	'hôtel, chambre dhôte, cabane dans les bois, apparthotel, ...'),
 (3,	'attention',	'les petits plus qui font la différence : fleurs, chocolats, souvenirs'),
 (4,	'activité',	'culture, sport, bien être, détente, visite ... toutes les activités sont là.');
 
@@ -179,14 +179,24 @@ INSERT INTO `prestation` (`id`, `libelle`, `description`, `url`, `unite`, `tarif
 ('162c527f-1e2f-4d91-ac84-3311a2085c09',	'Star Wars',	'Star Wars - Le Réveil de la Force. Séance cinéma 3D',	NULL,	NULL,	12.00,	'starwars.jpg',	4),
 ('badf0dcb-5a93-4ed7-9eb1-feeb46020617',	'Concert',	'Un concert à Nancy',	NULL,	NULL,	17.00,	'concert.jpg',	4),
 ('14c4c6d1-d4a4-408a-acd7-a130b5e529da',	'Appart Hotel',	'Appart’hôtel Coeur de Ville, en plein centre-ville',	NULL,	NULL,	56.00,	'apparthotel.jpg',	2),
-('38888d1e-d408-4e01-a0e6-05a966e348ea',	'Hôtel d\'Haussonville',	'Hôtel d\'Haussonville, au coeur de la Vieille ville à deux pas de la place Stanislas',	NULL,	NULL,	169.00,	'hotel_haussonville_logo.jpg',	2),
+('38888d1e-d408-4e01-a0e6-05a966e348ea',	'Hôtel dHaussonville',	'Hôtel dHaussonville, au coeur de la Vieille ville à deux pas de la place Stanislas',	NULL,	NULL,	169.00,	'hotel_haussonville_logo.jpg',	2),
 ('0abe4736-88ca-457a-b58f-a8234569b5fe',	'Boite de nuit',	'Discothèque, Boîte tendance avec des soirées à thème & DJ invités',	NULL,	NULL,	32.00,	'boitedenuit.jpg',	4),
 ('e8785174-b670-4c8b-ba0a-b779aa69b4c1',	'Planètes Laser',	'Laser game : Gilet électronique et pistolet laser comme matériel, vous voilà équipé.',	NULL,	NULL,	15.00,	'laser.jpg',	4),
-('6ad840b8-62df-49fe-8220-0b840f8c3d9e',	'Fort Aventure',	'Découvrez Fort Aventure à Bainville-sur-Madon, un site Accropierre unique en Lorraine ! Des Parcours Acrobatiques pour petits et grands, Jeu Mission Aventure, Crypte de Crapahute, Tyrolienne, Saut à l\'élastique inversé, Toboggan géant... et bien plus encore.',	NULL,	NULL,	25.00,	'fort.jpg',	4);
+('6ad840b8-62df-49fe-8220-0b840f8c3d9e',	'Fort Aventure',	'Découvrez Fort Aventure à Bainville-sur-Madon, un site Accropierre unique en Lorraine ! Des Parcours Acrobatiques pour petits et grands, Jeu Mission Aventure, Crypte de Crapahute, Tyrolienne, Saut à lélastique inversé, Toboggan géant... et bien plus encore.',	NULL,	NULL,	25.00,	'fort.jpg',	4);
 
+INSERT INTO `boxtemplate` (`id`, `libelle`, `description`, `montant`) VALUES
+('1', 'quos dolorem libero',	'Quisquam a eaque eum ipsa est est. Nemo eveniet dolorum nisi. Voluptatem dolores veritatis tempore unde recusandae. Numquam at qui odio voluptas inventore non vel.',	173.00),
+('2', 'eum quasi qui',	'Vel voluptatum veritatis aperiam omnis ad neque est. Temporibus quis et molestiae aut et nesciunt. Quis occaecati architecto quo consequatur reprehenderit aperiam quidem vel. Eum et et omnis.',	40.00),
+('3', 'sit dolor consectetur',	'Quasi reiciendis et architecto sunt excepturi est non. Maxime suscipit tenetur perspiciatis amet voluptatem eos est. Cum eveniet minus consectetur excepturi placeat.',	160.00),
+('4', 'et repudiandae ut',	'Consequatur doloremque quod non eveniet natus placeat. Accusantium necessitatibus id aliquid tenetur facere. Similique dolor est commodi alias enim beatae id incidunt. Eius eius eligendi ab magni ut impedit voluptatem.',	424.00),
+('5', 'reprehenderit possimus nemo',	'Quia sequi est similique corrupti ab perspiciatis repellendus. Sit quibusdam enim libero blanditiis nostrum ducimus. Ea rem dolorem magnam veritatis. Necessitatibus qui occaecati iusto ut pariatur assumenda sit sunt. Eum itaque et est rerum eum perferendis fuga possimus.',	112.00);
 
--- TEST USER
-INSERT INTO `user` (`email`, `password`, `nom`, `prenom`, `created_at`, `updated_at`) VALUES
-('testuser@mail.com', '$2y$12$U5b0KIrcAPM3pLFzMuzsz.5e3X5Uy4vjUVBGNDrYTaTrXIGaNLH7S', 'Test', 'Utilisateur', '2023-06-12 14:50:24', '0000-00-00 00:00:00');
+INSERT INTO `template2presta` (`template_id`, `presta_id`, `quantite`) VALUES
+('1',	'74af082e-4ed4-4c63-9fd3-602a5349c442',	4),
+('1',	'b15503a1-9694-485d-a336-874860a3b664',	5),
+('2',	'af272cf7-6e6b-4978-9e9d-8c40e989bf6c',	4),
+('2',	'162c527f-1e2f-4d91-ac84-3311a2085c09',	2),
+('3',	'b15503a1-9694-485d-a336-874860a3b664',	3),
+('4',	'95a72f23-2ee7-4cbe-98d0-3d372102fcae',	3);
 
 -- 2023-04-07 14:50:24

@@ -51,8 +51,8 @@ CREATE TABLE `box2presta` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `BoxTemplate`;
-CREATE TABLE `BoxTemplate` (
+DROP TABLE IF EXISTS `boxtemplate`;
+CREATE TABLE `boxtemplate` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `libelle` varchar(128) NOT NULL,
   `description` text NOT NULL,

@@ -1,6 +1,6 @@
 {% extends "gift.skeleton.twig" %}
 
-{% block title %}Félicitations !{% endblock %}
+{% block title %}{% endblock %}
 
 {% block giftmain %}
 
@@ -10,12 +10,12 @@
                 <div class="text-center">
                     <span class="icon icon-gift icon-5x"></span>
                     <h1 class="mb-0">Félicitations ! Vous avez reçu un coffret {% if box.kdo %}cadeau {% endif %} de la
-                        part de {{ user.prenom }} {{ user.nom }}.</h1>
+                        part de {{ box.users.prenom }} {{ box.users.nom }}.</h1>
                 </div>
                 <hr>
                 <h2>{{ box.libelle }}</h2>
                 <p class="m-0">{{ box.description }}</p>
-                <h4 class="mt-4 text-decoration-underline">Ce coffret contient les produits suivants :</h4>
+                <h4 class="mt-3">Ce coffret contient les produits suivants :</h4>
                 <table class="table table-striped">
                     <thead>
                     <tr>
@@ -30,22 +30,21 @@
                         <tr>
                             <td>{{ loop.index }}</td>
                             <td>
-                                <a href="{{ presta.url is null ? '#' : presta.url }}"
-                                   class="link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+                                <a href="{{ presta.url }}">
                                     <div>
-                                        <p class="m-0">{{ presta.libelle }}</p>
-                                        <p class="m-0 text-muted">{{ presta.description }}</p>
+                                        <p class="mt-0">{{ presta.libelle }}</p>
+                                        <p class="mb-0">{{ presta.description }}</p>
                                     </div>
                                 </a>
                             </td>
-                            <td>{{ presta.unite is null ? 'N/A' : presta.unite }}</td>
-                            <td>{{ presta.pivot.quantite }}</td>
+                            <td>{{ presta.unite }}</td>
+                            <td>{{ presta.quantite }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
-                <p class="text-muted mt-4">Vous pouvez contacter {{ user.prenom }} {{ user.nom }} par mail à
-                    l'adresse suivante : <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+                <p class="text-muted">Vous pouvez contacter {{ box.users.prenom }} {{ box.users.nom }} par mail à
+                    l'adresse suivante : <a href="mailto:{{ box.users.email }}">{{ box.users.email }}</a></p>
             </div>
         </div>
     </div>

@@ -1,0 +1,26 @@
+{% extends "gift.skeleton.twig" %}
+
+{% block title %}Coffrets prédéfinis{% endblock %}
+
+{% block giftmain %}
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <h1 class="text-center">Coffrets prédéfinis</h1>
+            </div>
+            {% for template in templates %}
+                <div class="card presta-card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ template.libelle }}</h5>
+                        <p class="card-text">{{ template.description }}</p>
+                        {% for presta in template.prestations %}
+                            <p class="card-text">{{ presta.libelle }} : {{ presta.tarif }}€
+                                (x{{ presta.pivot.quantite }})</p>
+                        {% endfor %}
+                        <a href="{{ url_for('templatesPick', {template_id: template.id}) }}" class="btn btn-primary">Choisir ce coffret</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
